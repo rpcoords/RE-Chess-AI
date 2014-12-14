@@ -2,6 +2,8 @@
  * 
  */
 package chess;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Class to create a chess board object composed of spaces.
@@ -136,6 +138,24 @@ public class ChessBoard {
 		
 		
 		// TODO: Adjust defensive values by adding values for selected piece.
+		
+	}
+	
+	public ArrayList<int[]> moveLocations(int file, int rank){
+		List answer = new ArrayList<int[2]>;
+		Space s = board[file][rank];
+		Piece moving = s.piece;
+		switch(moving){
+			case Piece.n: break;
+			case Piece.p: answer.add({file,rank+1});
+				if(file < 7 && board[file+1][rank+1].piece != Piece.e){
+					answer.add({file+1, rank+1});
+				}
+				if(file > 0 && board[file-1][rank+1].piece != Piece.e){
+					answer.add({file-1, rank+1});
+				}
+			case Piece.b: 
+		}
 		
 	}
 }
