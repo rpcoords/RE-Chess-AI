@@ -47,32 +47,32 @@ public class ChessBoard {
 	 */
 	public void init() {
 		// Initialize Chess Board.
-		board[0][0] = new Space(Piece.ROOK, 0, 0);
-		board[0][1] = new Space(Piece.KNIGHT, ROOK_VAL, 0);
-		board[0][2] = new Space(Piece.BISHOP, QUEEN_VAL, 0);
-		board[0][3] = new Space(Piece.QUEEN, KING_VAL, 0);
-		board[0][4] = new Space(Piece.KING, QUEEN_VAL, 0);
-		board[0][5] = new Space(Piece.BISHOP, KING_VAL, 0);
-		board[0][6] = new Space(Piece.KNIGHT, ROOK_VAL, 0);
-		board[0][7] = new Space(Piece.ROOK, 0, 0);
+		board[0][0] = new Space(Piece.r, 'w');
+		board[0][1] = new Space(Piece.n, 'w');
+		board[0][2] = new Space(Piece.b, 'w');
+		board[0][3] = new Space(Piece.q, 'w');
+		board[0][4] = new Space(Piece.k, 'w');
+		board[0][5] = new Space(Piece.b, 'w');
+		board[0][6] = new Space(Piece.n, 'w');
+		board[0][7] = new Space(Piece.r, 'w');
 		
-		board[1][0] = new Space(Piece.PAWN, ROOK_VAL, 0);
-		board[1][1] = new Space(Piece.PAWN, BISHOP_VAL, 0);
-		board[1][2] = new Space(Piece.PAWN, QUEEN_VAL, 0);
-		board[1][3] = new Space(Piece.PAWN, (KNIGHT_VAL + BISHOP_VAL + QUEEN_VAL + KING_VAL), 0);
-		board[1][4] = new Space(Piece.PAWN, (QUEEN_VAL + KING_VAL + BISHOP_VAL + KNIGHT_VAL), 0);
-		board[1][5] = new Space(Piece.PAWN, KING_VAL, 0);
-		board[1][6] = new Space(Piece.PAWN, BISHOP_VAL, 0);
-		board[1][7] = new Space(Piece.PAWN, ROOK_VAL, 0);
+		board[1][0] = new Space(Piece.p, 'w');
+		board[1][1] = new Space(Piece.p, 'w');
+		board[1][2] = new Space(Piece.p, 'w');
+		board[1][3] = new Space(Piece.p, 'w');
+		board[1][4] = new Space(Piece.p, 'w');
+		board[1][5] = new Space(Piece.p, 'w');
+		board[1][6] = new Space(Piece.p, 'w');
+		board[1][7] = new Space(Piece.p, 'w');
 		
-		board[2][0] = new Space(Piece.EMPTY, (PAWN_VAL + KNIGHT_VAL), 0);
-		board[2][1] = new Space(Piece.EMPTY, (PAWN_VAL + PAWN_VAL), 0);
-		board[2][2] = new Space(Piece.EMPTY, (PAWN_VAL + PAWN_VAL + KNIGHT_VAL), 0);
-		board[2][3] = new Space(Piece.EMPTY, (PAWN_VAL + PAWN_VAL), 0);
-		board[2][4] = new Space(Piece.EMPTY, (PAWN_VAL + PAWN_VAL), 0);
-		board[2][5] = new Space(Piece.EMPTY, (PAWN_VAL + PAWN_VAL + KNIGHT_VAL), 0);
-		board[2][6] = new Space(Piece.EMPTY, (PAWN_VAL + PAWN_VAL), 0);
-		board[2][7] = new Space(Piece.EMPTY, (PAWN_VAL + KNIGHT_VAL), 0);
+		board[2][0] = new Space();
+		board[2][1] = new Space();
+		board[2][2] = new Space();
+		board[2][3] = new Space();
+		board[2][4] = new Space();
+		board[2][5] = new Space();
+		board[2][6] = new Space();
+		board[2][7] = new Space();
 		
 		board[3][0] = new Space();
 		board[3][1] = new Space();
@@ -92,32 +92,32 @@ public class ChessBoard {
 		board[4][6] = new Space();
 		board[4][7] = new Space();
 		
-		board[5][0] = new Space(Piece.EMPTY, 0, (PAWN_VAL + KNIGHT_VAL));
-		board[5][1] = new Space(Piece.EMPTY, 0, (PAWN_VAL + PAWN_VAL));
-		board[5][2] = new Space(Piece.EMPTY, 0, (PAWN_VAL + PAWN_VAL + KNIGHT_VAL));
-		board[5][3] = new Space(Piece.EMPTY, 0, (PAWN_VAL + PAWN_VAL));
-		board[5][4] = new Space(Piece.EMPTY, 0, (PAWN_VAL + PAWN_VAL));
-		board[5][5] = new Space(Piece.EMPTY, 0, (PAWN_VAL + PAWN_VAL + KNIGHT_VAL));
-		board[5][6] = new Space(Piece.EMPTY, 0, (PAWN_VAL + PAWN_VAL));
-		board[5][7] = new Space(Piece.EMPTY, 0, (PAWN_VAL + KNIGHT_VAL));
+		board[5][0] = new Space();
+		board[5][1] = new Space();
+		board[5][2] = new Space();
+		board[5][3] = new Space();
+		board[5][4] = new Space();
+		board[5][5] = new Space();
+		board[5][6] = new Space();
+		board[5][7] = new Space();
 		
-		board[6][0] = new Space(Piece.PAWN, 0, ROOK_VAL);
-		board[6][1] = new Space(Piece.PAWN, 0, BISHOP_VAL);
-		board[6][2] = new Space(Piece.PAWN, 0, QUEEN_VAL);
-		board[6][3] = new Space(Piece.PAWN, 0, (KNIGHT_VAL + BISHOP_VAL + QUEEN_VAL + KING_VAL));
-		board[6][4] = new Space(Piece.PAWN, 0, (QUEEN_VAL + KING_VAL + BISHOP_VAL + KNIGHT_VAL));
-		board[6][5] = new Space(Piece.PAWN, 0, KING_VAL);
-		board[6][6] = new Space(Piece.PAWN, 0, BISHOP_VAL);
-		board[6][7] = new Space(Piece.PAWN, 0, ROOK_VAL);
+		board[6][0] = new Space(Piece.p, 'b');
+		board[6][1] = new Space(Piece.p, 'b');
+		board[6][2] = new Space(Piece.p, 'b');
+		board[6][3] = new Space(Piece.p, 'b');
+		board[6][4] = new Space(Piece.p, 'b');
+		board[6][5] = new Space(Piece.p, 'b');
+		board[6][6] = new Space(Piece.p, 'b');
+		board[6][7] = new Space(Piece.p, 'b');
 		
-		board[7][0] = new Space(Piece.ROOK, 0, 0);
-		board[7][1] = new Space(Piece.KNIGHT, 0, ROOK_VAL);
-		board[7][2] = new Space(Piece.BISHOP, 0, QUEEN_VAL);
-		board[7][3] = new Space(Piece.QUEEN, 0, KING_VAL);
-		board[7][4] = new Space(Piece.KING, 0, QUEEN_VAL);
-		board[7][5] = new Space(Piece.BISHOP, 0, KING_VAL);
-		board[7][6] = new Space(Piece.KNIGHT, 0, ROOK_VAL);
-		board[7][7] = new Space(Piece.ROOK, 0, 0);
+		board[7][0] = new Space(Piece.r, 'b');
+		board[7][1] = new Space(Piece.n, 'b');
+		board[7][2] = new Space(Piece.b, 'b');
+		board[7][3] = new Space(Piece.q, 'b');
+		board[7][4] = new Space(Piece.k, 'b');
+		board[7][5] = new Space(Piece.b, 'b');
+		board[7][6] = new Space(Piece.n, 'b');
+		board[7][7] = new Space(Piece.r, 'b');
 	}
 	
 	/**

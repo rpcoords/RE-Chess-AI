@@ -11,15 +11,13 @@ package chess;
 public class Space {
 	
 	Piece piece;
-	int whiteDefenseValue, blackDefenseValue;
+	char color = 'n';
 	
 	/**
 	 * Default Constructor to create an empty space on the chess board.
 	 */
 	public Space() {
 		piece = Piece.EMPTY;
-		whiteDefenseValue = 0;
-		blackDefenseValue = 0;
 	}
 	
 	/**
@@ -28,9 +26,8 @@ public class Space {
 	 * @param w how well white is defending the space.
 	 * @param b how well black is defending the space.
 	 */
-	public Space(Piece p, int w, int b) {
+	public Space(Piece p, char c) {
 		piece = p;
-		whiteDefenseValue = w;
-		blackDefenseValue = b;
+		color = c;
 	}
 }
