@@ -6,17 +6,18 @@ package chess;
 /**
  * Class to create a space on a chess board.
  * @author Robert Coords
+ * TODO: Represent who controls this space (use enum type?).
  */
 public class Space {
 	
-	char piece;
+	Piece piece;
 	int whiteDefenseValue, blackDefenseValue;
 	
 	/**
 	 * Default Constructor to create an empty space on the chess board.
 	 */
 	public Space() {
-		piece = 'E'; // 'E' = empty (no piece on the space).
+		piece = Piece.EMPTY;
 		whiteDefenseValue = 0;
 		blackDefenseValue = 0;
 	}
@@ -27,7 +28,7 @@ public class Space {
 	 * @param w how well white is defending the space.
 	 * @param b how well black is defending the space.
 	 */
-	public Space(char p, int w, int b) {
+	public Space(Piece p, int w, int b) {
 		piece = p;
 		whiteDefenseValue = w;
 		blackDefenseValue = b;
