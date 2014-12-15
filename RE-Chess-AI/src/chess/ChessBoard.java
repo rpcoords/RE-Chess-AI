@@ -141,6 +141,12 @@ public class ChessBoard {
 		
 	}
 	
+	/**
+	 * Returns an Array List of all possible move coordinates
+	 * @param file x value (even though it is a column...)
+	 * @param rank y value (even though it is a row...)
+	 * 
+	 */
 	public ArrayList<int[]> moveLocations(int file, int rank){
 		List answer = new ArrayList<int[2]>;
 		Space s = board[file][rank];
@@ -177,7 +183,39 @@ public class ChessBoard {
 				}while{board[file-i][rank-i].piece == Piece.e && board[file-i-1][rank-i-1].piece != pcolor}
 				break;
 			case Piece.n:
-				
+				if(file >0){
+					if(rank > 1){
+						answer.add({file-1, rank-2});
+					}
+					if(rank < 6){
+						answer.add({file-1, rank+2});
+					}
+				}
+				if(file > 1){
+					if(rank>0){
+						answer.add({file-2, rank-1});
+					}
+					if(rank<7){
+						answer.add({file-2, rank+1});
+					}
+				}
+				if(file < 6){
+					if(rank>0){
+						answer.add({file+2, rank-1});
+					}
+					if(rank<7){
+						answer.add({file+2, rank+1});
+					}
+				}
+				if(file <7){
+					if(rank > 1){
+						answer.add({file+1, rank-2});
+					}
+					if(rank < 6){
+						answer.add({file+1, rank+2});
+					}
+				}
+				break;
 			case Piece.r; int i = 1;
 				do{
 					answer.add({file+i, rank});
