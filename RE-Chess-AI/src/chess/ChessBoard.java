@@ -307,4 +307,42 @@ public class ChessBoard {
 		}
 		
 	}
+	
+	public double eval(char col){
+		double answer = 0.0;
+		for(int[] u: board){
+			int i = 0;
+			for(Space sp: u){
+				int j = 0;
+				if(sp.color == col){
+					List stuff = moveLocations(i, j);
+					for(int[] cor: stuff){
+						Space ch = board[cor[0]][cor[1]];
+						if(ch.piece == piece.p){
+							answer += PAWN_VALUE;
+						}
+						if(ch.piece == piece.b){
+							answer += BISHOP_VALUE;
+						}
+						if(ch.piece == piece.n){
+							answer += KNIGHT_VALUE;
+						}
+						if(ch.piece == piece.r){
+							answer += ROOK_VALUE;
+						}
+						if(ch.piece == piece.q){
+							answer += QUEEN_VALUE;
+						}
+						if(ch.piece == piece.k){
+							answer += KING_VALUE;
+						}
+					}
+				}
+				j++;
+			}
+			i++;
+		}
+		
+		return answer;
+	}
 }
