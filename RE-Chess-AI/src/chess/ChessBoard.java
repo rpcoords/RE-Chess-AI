@@ -145,8 +145,9 @@ public class ChessBoard {
 		List answer = new ArrayList<int[2]>;
 		Space s = board[file][rank];
 		Piece moving = s.piece;
+		char pcolor = s.color;
 		switch(moving){
-			case Piece.n: break;
+			case Piece.e: break;
 			case Piece.p: answer.add({file,rank+1});
 				if(file < 7 && board[file+1][rank+1].piece != Piece.e){
 					answer.add({file+1, rank+1});
@@ -154,7 +155,117 @@ public class ChessBoard {
 				if(file > 0 && board[file-1][rank+1].piece != Piece.e){
 					answer.add({file-1, rank+1});
 				}
-			case Piece.b: 
+			case Piece.b: int i = 1;
+				do{
+					answer.add({file+i, rank+i});
+					i++;
+				}while{board[file+i][rank+i].piece == Piece.e && board[file+i+1][rank+i+1].piece != pcolor} //check one space further for piece of same color to stop it here, to be implimented
+				i = 1;
+				do{
+					answer.add({file+i, rank-i});
+					i++;
+				}while{board[file+i][rank-i].piece == Piece.e && board[file+i+1][rank-i-1].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file-i, rank+i});
+					i++;
+				}while{board[file-i][rank+i].piece == Piece.e && board[file-i-1][rank+i+1].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file-i, rank-i});
+					i++;
+				}while{board[file-i][rank-i].piece == Piece.e && board[file-i-1][rank-i-1].piece != pcolor}
+				break;
+			case Piece.n:
+				
+			case Piece.r; int i = 1;
+				do{
+					answer.add({file+i, rank});
+					i++;
+				}while{board[file+i][rank].piece == Piece.e && board[file+i+1][rank].piece != pcolor} //check one space further for piece of same color to stop it here, to be implimented
+				i = 1;
+				do{
+					answer.add({file, rank-i});
+					i++;
+				}while{board[file][rank-i].piece == Piece.e && board[file][rank-i-1].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file, rank+i});
+					i++;
+				}while{board[file][rank+i].piece == Piece.e && board[file][rank+i+1].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file-i, rank});
+					i++;
+				}while{board[file-i][rank].piece == Piece.e && board[file-i-1][rank].piece != pcolor}
+				break;
+			case Piece.q;  int i = 1;
+				do{
+					answer.add({file+i, rank});
+					i++;
+				}while{board[file+i][rank].piece == Piece.e && board[file+i+1][rank].piece != pcolor} //check one space further for piece of same color to stop it here, to be implimented
+				i = 1;
+				do{
+					answer.add({file, rank-i});
+					i++;
+				}while{board[file][rank-i].piece == Piece.e && board[file][rank-i-1].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file, rank+i});
+					i++;
+				}while{board[file][rank+i].piece == Piece.e && board[file][rank+i+1].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file-i, rank});
+					i++;
+				}while{board[file-i][rank].piece == Piece.e && board[file-i-1][rank].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file+i, rank+i});
+					i++;
+				}while{board[file+i][rank+i].piece == Piece.e && board[file+i+1][rank+i+1].piece != pcolor} //check one space further for piece of same color to stop it here, to be implimented
+				i = 1;
+				do{
+					answer.add({file+i, rank-i});
+					i++;
+				}while{board[file+i][rank-i].piece == Piece.e && board[file+i+1][rank-i-1].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file-i, rank+i});
+					i++;
+				}while{board[file-i][rank+i].piece == Piece.e && board[file-i-1][rank+i+1].piece != pcolor}
+				i = 1;
+				do{
+					answer.add({file-i, rank-i});
+					i++;
+				}while{board[file-i][rank-i].piece == Piece.e && board[file-i-1][rank-i-1].piece != pcolor}
+				break;
+			case Piece.k;
+				if(board[file+1][rank+1].color != s.color){
+					answer.add({file+1, rank+1});
+				}
+				if(board[file+1][rank-1].color != s.color){
+					answer.add({file+1, rank-1});
+				}
+				if(board[file-1][rank+1].color != s.color){
+					answer.add({file-1, rank+1});
+				}
+				if(board[file-1][rank-1].color != s.color){
+					answer.add({file-1, rank-1});
+				}
+				if(board[file+1][rank].color != s.color){
+					answer.add({file+1, rank+1});
+				}
+				if(board[file][rank-1].color != s.color){
+					answer.add({file+1, rank-1});
+				}
+				if(board[file][rank+1].color != s.color){
+					answer.add({file-1, rank+1});
+				}
+				if(board[file-1][rank].color != s.color){
+					answer.add({file-1, rank-1});
+				}
+				break;
 		}
 		
 	}
