@@ -261,8 +261,10 @@ public class ChessBoard {
 			case r: i = 1;
 				try {
 				do{
-					if (file < 7) {
+					if (file < 7 && board[file+i][rank].color != pcolor) {
 						answer.add(new int[]{file+i, rank});
+					}else{
+						break;
 					}
 					i++;
 				}while(board[file+i][rank].piece == Piece.e && board[file+i+1][rank].color != pcolor); //check one space further for piece of same color to stop it here, to be implimented
@@ -272,8 +274,10 @@ public class ChessBoard {
 				i = 1;
 				try {
 				do{
-					if (rank > 0) {
+					if (rank > 0 && board[file][rank-i].color != board[file][rank].color) {
 						answer.add(new int[]{file, rank-i});
+					}else{
+						break;
 					}
 					i++;
 				}while(board[file][rank-i].piece == Piece.e && board[file][rank-i-1].color != pcolor);
@@ -283,8 +287,10 @@ public class ChessBoard {
 				i = 1;
 				try {
 				do{
-					if (rank < 7) {
+					if (rank < 7 && board[file][rank+i].color != board[file][rank].color) {
 						answer.add(new int[]{file, rank+i});
+					}else{
+						break;
 					}
 					i++;
 				}while(board[file][rank+i].piece == Piece.e && board[file][rank+i+1].color != pcolor);
@@ -294,8 +300,10 @@ public class ChessBoard {
 				i = 1;
 				try {
 				do{
-					if (file > 0) {
+					if (file > 0 && board[file-i][rank].color != board[file][rank].color) {
 						answer.add(new int[]{file-i, rank});
+					}else{
+						break;
 					}
 					i++;
 				}while(board[file-i][rank].piece == Piece.e && board[file-i-1][rank].color != pcolor);
@@ -304,45 +312,61 @@ public class ChessBoard {
 				}
 				break;
 			case q:  i = 1;
-				try {
+			try {
 				do{
-					if (file < 7) {
+					if (file < 7 && board[file+i][rank].color != board[file][rank].color) {
 						answer.add(new int[]{file+i, rank});
+					}else{
+						break;
 					}
 					i++;
 				}while(board[file+i][rank].piece == Piece.e && board[file+i+1][rank].color != pcolor); //check one space further for piece of same color to stop it here, to be implimented
-				} catch (ArrayIndexOutOfBoundsException e) { }
+				} catch (ArrayIndexOutOfBoundsException e) {
+					
+				}
 				i = 1;
 				try {
 				do{
-					if (rank > 0) {
+					if (rank > 0 && board[file][rank-i].color != board[file][rank].color) {
 						answer.add(new int[]{file, rank-i});
+					}else{
+						break;
 					}
 					i++;
 				}while(board[file][rank-i].piece == Piece.e && board[file][rank-i-1].color != pcolor);
-				} catch (ArrayIndexOutOfBoundsException e) { }
+				} catch (ArrayIndexOutOfBoundsException e) {
+					
+				}
 				i = 1;
 				try {
 				do{
-					if (rank < 7) {
+					if (rank < 7 && board[file][rank+i].color != board[file][rank].color) {
 						answer.add(new int[]{file, rank+i});
+					}else{
+						break;
 					}
 					i++;
 				}while(board[file][rank+i].piece == Piece.e && board[file][rank+i+1].color != pcolor);
-				} catch (ArrayIndexOutOfBoundsException e) { }
+				} catch (ArrayIndexOutOfBoundsException e) {
+					
+				}
 				i = 1;
 				try {
 				do{
-					if (file > 0) {
+					if (file > 0 && board[file-i][rank].color != board[file][rank].color) {
 						answer.add(new int[]{file-i, rank});
+					}else{
+						break;
 					}
 					i++;
 				}while(board[file-i][rank].piece == Piece.e && board[file-i-1][rank].color != pcolor);
-				} catch (ArrayIndexOutOfBoundsException e) { }
+				} catch (ArrayIndexOutOfBoundsException e) {
+					
+				}
 				i = 1;
 				try {
 				do{
-					if ((rank < 7) && (file < 7)) {
+					if ((rank < 7) && (file < 7) && (board[file+i][rank+i].color != pcolor)) {
 						answer.add(new int[]{file+i, rank+i});
 					}
 					i++;

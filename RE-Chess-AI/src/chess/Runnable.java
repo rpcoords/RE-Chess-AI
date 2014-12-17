@@ -82,6 +82,7 @@ public class Runnable {
 					ourMove = "Pe2e4";
 				}
 				URL movingURL = new URL(moveLink+ourMove+"/");
+				System.out.println(movingURL);
 				conn2 = movingURL.openConnection();
 			} else {
 				// TODO: Wait 5 seconds and poll again.
