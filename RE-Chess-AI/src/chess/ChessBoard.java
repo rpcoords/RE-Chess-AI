@@ -326,6 +326,43 @@ public class ChessBoard {
 		
 	}
 	
+	public int eval(char col){
+		int answer = 0;
+		for(Space[] u: board){
+			int i = 0;
+			for(Space sp: u){
+				int j = 0;
+				if(sp.color == col){
+					ArrayList<int[]> stuff = moveLocations(i, j);
+					for(int[] cor: stuff){
+						Space ch = board[cor[0]][cor[1]];
+						if(ch.piece == Piece.p){
+							answer += PAWN_VAL;
+						}
+						if(ch.piece == Piece.b){
+							answer += BISHOP_VAL;
+						}
+						if(ch.piece == Piece.n){
+							answer += KNIGHT_VAL;
+						}
+						if(ch.piece == Piece.r){
+							answer += ROOK_VAL;
+						}
+						if(ch.piece == Piece.q){
+							answer += QUEEN_VAL;
+						}
+						if(ch.piece == Piece.k){
+							answer += KING_VAL;
+						}
+					}
+				}
+				j++;
+			}
+			i++;
+		}
+		return answer;
+	}
+	
 	public ChessBoard clone() {
 		ChessBoard cb = new ChessBoard();
 		cb.board = this.board.clone();
