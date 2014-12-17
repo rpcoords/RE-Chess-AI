@@ -17,7 +17,7 @@ public class Space {
 	 * Default Constructor to create an empty space on the chess board.
 	 */
 	public Space() {
-		piece = Piece.EMPTY;
+		piece = Piece.e;
 	}
 	
 	/**
