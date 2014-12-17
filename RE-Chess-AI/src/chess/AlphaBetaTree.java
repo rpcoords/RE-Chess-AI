@@ -147,7 +147,7 @@ public class AlphaBetaTree {
 					acts = state.moveLocations(x, y);
 					for (int a = 0; a < acts.size(); a++) {
 						locs = acts.get(a);
-						temp = state.board[x][y].piece + intToString(y) + (x + 1) + intToString(locs[1]) + (locs[0] + 1);
+						temp = state.board[x][y].piece.toString().toUpperCase() + intToString(y) + (x + 1) + intToString(locs[1]) + (locs[0] + 1);
 						actions.add(temp);
 					}
 				}
@@ -175,5 +175,5 @@ public class AlphaBetaTree {
 		} else {
 			return "h";
 		}
-	}
+	} 
 }
