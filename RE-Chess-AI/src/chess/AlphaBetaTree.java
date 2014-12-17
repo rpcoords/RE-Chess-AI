@@ -3,6 +3,8 @@
  */
 package chess;
 
+import java.util.ArrayList;
+
 /**
  * @author Robert Coords
  *
@@ -24,7 +26,7 @@ public class AlphaBetaTree {
 		int negInf = -999999999;
 		
 		int util = maxVal(state, negInf, posInf);
-//		move = ACTION(state);
+//		move = action(state);
 		return move;
 	}
 	
@@ -115,5 +117,9 @@ public class AlphaBetaTree {
 	public int utility(ChessBoard state) {
 		
 		return 0;
+	}
+	
+	public ArrayList<int[]> action(ChessBoard state) {
+		//state.moveLocations(file, rank)
 	}
 }
