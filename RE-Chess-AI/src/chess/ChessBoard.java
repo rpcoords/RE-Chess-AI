@@ -128,6 +128,7 @@ public class ChessBoard {
 	 * TODO: Create moveUpdate
 	 */
 	public void moveUpdate(String move) {
+		move = move.toLowerCase();
 		String currY = move.substring(1, 2);
 		String currX = move.substring(2, 3);
 		String newY = move.substring(3, 4);
@@ -339,7 +340,7 @@ public class ChessBoard {
 			for(Space sp: u){
 				int j = 0;
 				if(sp.color == col){
-					List stuff = moveLocations(i, j);
+					ArrayList<int[]> stuff = moveLocations(i, j);
 					for(int[] cor: stuff){
 						Space ch = board[cor[0]][cor[1]];
 						if(ch.piece == piece.p){
