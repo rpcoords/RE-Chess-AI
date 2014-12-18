@@ -62,12 +62,7 @@ public class Runnable {
 		boolean playing = true;
 		while (playing) {
 			// Polling API.
-			if(obj.getBoolean("ready") == true){
-				ready = true;
-			}
-			else{
-				ready = false;
-			}
+			ready = obj.getBoolean("ready");
 			// Checks if
 			if (ready) {
 				// TODO: Update chess board.
