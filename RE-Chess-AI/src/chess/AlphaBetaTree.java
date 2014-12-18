@@ -3,15 +3,25 @@
  */
 package chess;
 
+import java.util.ArrayList;
+
 /**
  * @author Robert Coords
  *
  */
 public class AlphaBetaTree {
 	
+	char color;
+	String best;
 	
 	public AlphaBetaTree() {
-		
+		color = '\0';
+		best = "";
+	}
+	
+	public AlphaBetaTree(char c) {
+		color = c;
+		best = "";
 	}
 	
 	public void initTree() {
@@ -23,37 +33,54 @@ public class AlphaBetaTree {
 		int posInf = 999999999;
 		int negInf = -999999999;
 		
-		int util = maxVal(state, negInf, posInf);
-//		move = ACTION(state);
-		return move;
+		return maxVal(state, negInf, posInf);
+//		move = action(state);
+//		return move;
 	}
 	
-	public int maxVal(ChessBoard state, int alpha, int beta) {
-		if (terminalTest(state) == true) {
-			return utility(state);
-		}
+	public String maxVal(ChessBoard state, int alpha, int beta) {
+//		if (terminalTest(state) == true) {
+//			return utility(state);
+//		}
 		int v = -999999999;
 		String a = "";
-		int num = 0; // TODO: change to total number of moves from given state.
+		ArrayList<String> actions = action(state, color);
+		int num = actions.size();
 		
-		for (int i = 0; i < num; i++) {
+		a = actions.get(0);
+		v = max(v, minVal(result(state, a), alpha, beta));
+		beta = v;
+		
+		for (int i = 1; i < num; i++) {
+			a = actions.get(i);
 			v = max(v, minVal(result(state, a), alpha, beta));
 			if (v >= beta) {
-				return v;
+				return a;
 			}
 			alpha = max(alpha, v);
+			if (v == alpha) {
+				best = a;
+			}
 		}
 		
-		return v;
+//		System.out.println(best);
+		return a;
 	}
 	
 	public int minVal(ChessBoard state, int alpha, int beta) {
 		
 		int v = 999999999;
 		String a = "";
-		int num = 0; // TODO: change to total number of moves from given state.
+		char opposite = 'b';
+		if (this.color == opposite) {
+			opposite = 'w';
+		}
+		ArrayList<String> actions = action(state, opposite);
+		int num = actions.size();
+		
 		
 		for (int i = 0; i < num; i++) {
+			a = actions.get(i);
 			v = min(v, utility(result(state, a)));
 //			v = min(v, maxVal(result(state, a), alpha, beta));
 			if (v <= alpha) {
@@ -103,8 +130,9 @@ public class AlphaBetaTree {
 	 * @return
 	 */
 	public ChessBoard result(ChessBoard state, String move) {
-		state.moveUpdate(move);
-		return state;
+		ChessBoard clone = state.clone();
+		clone.moveUpdate(move);
+		return clone;
 	}
 	
 	/**
@@ -113,7 +141,52 @@ public class AlphaBetaTree {
 	 * @return
 	 */
 	public int utility(ChessBoard state) {
-		
-		return 0;
+		return state.eval(color);
 	}
+	
+	public ArrayList<String> action(ChessBoard state, char c) {
+		ArrayList<String> actions = new ArrayList<String>();
+		ArrayList<int[]> acts = new ArrayList<int[]>();
+		int [] locs = new int[2];
+		String temp =  "";
+		c = 'w';
+		
+		// Checks every square
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+//				System.out.println(c);
+//				System.out.println((state.board[x][y].color == c));
+				if ((state.board[x][y].color == c)) {
+					acts = state.moveLocations(x, y);
+					for (int a = 0; a < acts.size(); a++) {
+						locs = acts.get(a);
+						temp = state.board[x][y].piece.toString().toUpperCase() + intToString(y) + (x + 1) + intToString(locs[1]) + (locs[0] + 1);
+						actions.add(temp);
+					}
+				}
+			}
+		}
+//		System.out.println("size: " + actions.size());
+		return actions;
+	}
+	
+	public String intToString(int i) {
+		if (i == 0) {
+			return "a";
+		} else if (i == 1) {
+			return "b";
+		} else if (i == 2) {
+			return "c";
+		} else if (i == 3) {
+			return "d";
+		} else if (i == 4) {
+			return "e";
+		} else if (i == 5) {
+			return "f";
+		} else if (i == 6) {
+			return "g";
+		} else {
+			return "h";
+		}
+	} 
 }
