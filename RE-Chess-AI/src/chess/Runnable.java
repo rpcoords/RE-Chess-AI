@@ -48,7 +48,6 @@ public class Runnable {
 		String moveLink = "http://www.bencarle.com/chess/move/" + gameID + "/204/1aca466d/";
 		URL pollingURL = new URL(link);
 		URLConnection conn = pollingURL.openConnection();
-		URLConnection conn2 = pollingURL.openConnection();
 		InputStream is = conn.getInputStream();
 		// Create and initialize ChessBoard
 		ChessBoard cb = new ChessBoard();
@@ -73,17 +72,24 @@ public class Runnable {
 			if (ready) {
 				// TODO: Update chess board.
 				if (lastMoveNumber != obj.getInt("lastmovenumber")) {
+					System.out.println(obj.getString("lastmove"));
 					cb.moveUpdate(obj.getString("lastmove"));
 					lastMoveNumber = obj.getInt("lastmovenumber");
+					System.out.println(foo);
 				}
 				// TODO: Make move.
 				String ourMove = abt.alphaBetaSearch(cb);
-				if (lastMoveNumber == 0) {
-					ourMove = "Pe2e4";
-				}
-				URL movingURL = new URL(moveLink+ourMove+"/");
-				System.out.println(movingURL);
-				conn2 = movingURL.openConnection();
+//				System.out.println("our: " + ourMove);
+//				if (lastMoveNumber == 0) {
+//					ourMove = "Pe2e4";
+//				}
+				try{
+					URL movingURL = new URL(moveLink+ourMove+"/");
+					URLConnection conn2 = movingURL.openConnection();
+					InputStream blah = conn2.getInputStream();
+					System.out.println(movingURL);
+					cb.moveUpdate(ourMove);
+				}catch(java.io.FileNotFoundException e){}
 			} else {
 				// TODO: Wait 5 seconds and poll again.
 				try {

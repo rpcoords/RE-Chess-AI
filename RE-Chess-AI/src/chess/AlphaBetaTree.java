@@ -44,10 +44,14 @@ public class AlphaBetaTree {
 //		}
 		int v = -999999999;
 		String a = "";
-		ArrayList<String> actions = action(state);
+		ArrayList<String> actions = action(state, color);
 		int num = actions.size();
 		
-		for (int i = 0; i < num; i++) {
+		a = actions.get(0);
+		v = max(v, minVal(result(state, a), alpha, beta));
+		beta = v;
+		
+		for (int i = 1; i < num; i++) {
 			a = actions.get(i);
 			v = max(v, minVal(result(state, a), alpha, beta));
 			if (v >= beta) {
@@ -59,14 +63,19 @@ public class AlphaBetaTree {
 			}
 		}
 		
-		return best;
+//		System.out.println(best);
+		return a;
 	}
 	
 	public int minVal(ChessBoard state, int alpha, int beta) {
 		
 		int v = 999999999;
 		String a = "";
-		ArrayList<String> actions = action(state);
+		char opposite = 'b';
+		if (this.color == opposite) {
+			opposite = 'w';
+		}
+		ArrayList<String> actions = action(state, opposite);
 		int num = actions.size();
 		
 		
@@ -121,8 +130,9 @@ public class AlphaBetaTree {
 	 * @return
 	 */
 	public ChessBoard result(ChessBoard state, String move) {
-		state.moveUpdate(move);
-		return state;
+		ChessBoard clone = state.clone();
+		clone.moveUpdate(move);
+		return clone;
 	}
 	
 	/**
@@ -134,16 +144,19 @@ public class AlphaBetaTree {
 		return state.eval(color);
 	}
 	
-	public ArrayList<String> action(ChessBoard state) {
+	public ArrayList<String> action(ChessBoard state, char c) {
 		ArrayList<String> actions = new ArrayList<String>();
 		ArrayList<int[]> acts = new ArrayList<int[]>();
 		int [] locs = new int[2];
 		String temp =  "";
+		c = 'w';
 		
 		// Checks every square
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-				if ((state.board[x][y].color == 'w') || (state.board[x][y].color == 'b')) {
+//				System.out.println(c);
+//				System.out.println((state.board[x][y].color == c));
+				if ((state.board[x][y].color == c)) {
 					acts = state.moveLocations(x, y);
 					for (int a = 0; a < acts.size(); a++) {
 						locs = acts.get(a);
@@ -153,7 +166,7 @@ public class AlphaBetaTree {
 				}
 			}
 		}
-		
+//		System.out.println("size: " + actions.size());
 		return actions;
 	}
 	

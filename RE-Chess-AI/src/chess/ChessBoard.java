@@ -136,8 +136,14 @@ public class ChessBoard {
 		String newX = move.substring(4, 5);
 //		System.out.println((Integer.valueOf(newX).intValue() - 1) + "" + rankerz(newY) + "-" + (Integer.valueOf(currX).intValue() - 1) + "" + rankerz(currY));
 		
-		board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)] = board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)];
-		board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)] = new Space();
+		board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)].color = board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].color;
+		board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)].piece = board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].piece;
+				
+				
+		board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].color = 'e';
+		board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].piece = Piece.e;
+		
+//		System.out.println(board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)].piece + " " + board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].piece);
 	}
 	
 	public int rankerz(String y) {
@@ -174,17 +180,36 @@ public class ChessBoard {
 		int[] input = new int[2];
 		switch(moving){
 			case e: break;
-			case p: answer.add(new int[]{file,rank+1});
-				try {
-				if(file < 7 && board[file+1][rank+1].piece != Piece.e){
-					answer.add(new int[]{file+1, rank+1});
-				}
-				} catch (ArrayIndexOutOfBoundsException e) { }
-				try {
-				if(file > 0 && board[file-1][rank+1].piece != Piece.e){
-					answer.add(new int[]{file-1, rank+1});
-				}
-				} catch (ArrayIndexOutOfBoundsException e) { }
+			case p: try {
+					if(pcolor == 'w' && board[file][rank+1].piece == Piece.e){
+						answer.add(new int[]{file,rank+1});
+					}
+					} catch (ArrayIndexOutOfBoundsException e) { }
+					try {
+					if(pcolor == 'w' && board[file+1][rank+1].color == 'b'){
+						answer.add(new int[]{file+1,rank+1});
+					}
+					} catch (ArrayIndexOutOfBoundsException e) { }
+					try {
+					if(pcolor == 'w' && board[file-1][rank+1].color == 'b'){
+						answer.add(new int[]{file-1,rank+1});
+					}
+					} catch (ArrayIndexOutOfBoundsException e) { }
+					try {
+					if(pcolor == 'b' && board[file][rank-1].piece == Piece.e){
+						answer.add(new int[]{file,rank-1});
+					}
+					} catch (ArrayIndexOutOfBoundsException e) { }
+					try {
+					if(pcolor == 'b' && board[file+1][rank+1].color == 'w'){
+						answer.add(new int[]{file+1,rank+1});
+					}
+					} catch (ArrayIndexOutOfBoundsException e) { }
+					try {
+					if(pcolor == 'b' && board[file-1][rank+1].color == 'w'){
+						answer.add(new int[]{file-1,rank+1});
+					}
+					} catch (ArrayIndexOutOfBoundsException e) { }
 			case b: int i = 1;
 				try {
 				do{
@@ -267,7 +292,7 @@ public class ChessBoard {
 						break;
 					}
 					i++;
-				}while(board[file+i][rank].piece == Piece.e && board[file+i+1][rank].color != pcolor); //check one space further for piece of same color to stop it here, to be implimented
+				}while((board[file+i][rank].piece == Piece.e) && (board[file+i+1][rank].color != pcolor)); //check one space further for piece of same color to stop it here, to be implimented
 				} catch (ArrayIndexOutOfBoundsException e) {
 					
 				}
@@ -293,7 +318,7 @@ public class ChessBoard {
 						break;
 					}
 					i++;
-				}while(board[file][rank+i].piece == Piece.e && board[file][rank+i+1].color != pcolor);
+				}while((board[file][rank+i].piece == Piece.e) && (board[file][rank+i+1].color != pcolor));
 				} catch (ArrayIndexOutOfBoundsException e) {
 					
 				}
@@ -486,7 +511,12 @@ public class ChessBoard {
 	
 	public ChessBoard clone() {
 		ChessBoard cb = new ChessBoard();
-		cb.board = this.board.clone();
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				cb.board[x][y] = this.board[x][y].clone();
+			}
+		}
+		
 		return cb;
 	}
 }

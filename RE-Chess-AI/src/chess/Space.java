@@ -30,4 +30,11 @@ public class Space {
 		piece = p;
 		color = c;
 	}
+	
+	public Space clone() {
+		Space s = new Space();
+		s.piece = this.piece;
+		s.color = this.color;
+		return s;
+	}
 }
