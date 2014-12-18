@@ -46,9 +46,9 @@ public class Runnable {
 		// Creates polling URL
 		String link = "http://www.bencarle.com/chess/poll/" + gameID + "/204/1aca466d";
 		String moveLink = "http://www.bencarle.com/chess/move/" + gameID + "/204/1aca466d/";
-		URL pollingURL = new URL(link);
-		URLConnection conn = pollingURL.openConnection();
-		InputStream is = conn.getInputStream();
+//		URL pollingURL = new URL(link);
+//		URLConnection conn = pollingURL.openConnection();
+//		InputStream is = conn.getInputStream();
 		// Create and initialize ChessBoard
 		ChessBoard cb = new ChessBoard();
 		// Polling variables taken from API.
@@ -56,29 +56,52 @@ public class Runnable {
 		double secondsLeft = 900.0;
 		String lastMove = "0";
 		int lastMoveNumber = 0;
-		String foo = new Scanner(is).useDelimiter("\\A").next();
-		JSONObject obj = new JSONObject(foo);
+		String ourMove = "";
+//		String foo = new Scanner(is).useDelimiter("\\A").next();
+//		JSONObject obj = new JSONObject(foo);
 		// Game loop
 		boolean playing = true;
 		while (playing) {
 			// Polling API.
-			if(obj.getBoolean("ready") == true){
-				ready = true;
+//			if(obj.getBoolean("ready") == true){
+//				ready = true;
+//			}
+//			else{
+//				ready = false;
+//			}
+			URL pollingURL = new URL(link);
+			URLConnection conn = pollingURL.openConnection();
+			InputStream is = conn.getInputStream();
+			String foo = new Scanner(is).useDelimiter("\\A").next();
+			JSONObject obj = new JSONObject(foo);
+			ready = obj.getBoolean("ready");
+			System.out.println(lastMoveNumber + " " + ready + "-" + foo);
+			if (lastMoveNumber != obj.getInt("lastmovenumber")) {
+				try {
+				System.out.println("last " + obj.getString("lastmove"));
+				if (lastMove != obj.getString("lastmove")) {
+					lastMove = obj.getString("lastmove");
+					cb.moveUpdate(lastMove);
+				}
+				} catch (JSONException e) { }
+				lastMoveNumber = obj.getInt("lastmovenumber");
+				System.out.println(foo);
 			}
-			else{
-				ready = false;
-			}
+			System.out.println(cb.board[0][1].piece + " " + cb.board[2][0].piece);
 			// Checks if
 			if (ready) {
 				// TODO: Update chess board.
-				if (lastMoveNumber != obj.getInt("lastmovenumber")) {
-					System.out.println(obj.getString("lastmove"));
-					cb.moveUpdate(obj.getString("lastmove"));
-					lastMoveNumber = obj.getInt("lastmovenumber");
-					System.out.println(foo);
-				}
+//				if (lastMoveNumber != obj.getInt("lastmovenumber")) {
+//					System.out.println(obj.getString("lastmove"));
+//					if (lastMove != obj.getString("lastmove")) {
+//						lastMove = obj.getString("lastmove");
+//						cb.moveUpdate(lastMove);
+//					}
+//					lastMoveNumber = obj.getInt("lastmovenumber");
+//					System.out.println(foo);
+//				}
 				// TODO: Make move.
-				String ourMove = abt.alphaBetaSearch(cb);
+				ourMove = abt.alphaBetaSearch(cb);
 //				System.out.println("our: " + ourMove);
 //				if (lastMoveNumber == 0) {
 //					ourMove = "Pe2e4";
@@ -87,8 +110,9 @@ public class Runnable {
 					URL movingURL = new URL(moveLink+ourMove+"/");
 					URLConnection conn2 = movingURL.openConnection();
 					InputStream blah = conn2.getInputStream();
-					System.out.println(movingURL);
-					cb.moveUpdate(ourMove);
+					System.out.println("move: " + movingURL);
+					
+//					ready = false;
 				}catch(java.io.FileNotFoundException e){}
 			} else {
 				// TODO: Wait 5 seconds and poll again.
@@ -97,9 +121,9 @@ public class Runnable {
 				} catch(InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}
-				is = conn.getInputStream();
-				foo = new Scanner(is).useDelimiter("\\A").next();
-				obj = new JSONObject(foo);
+//				is = conn.getInputStream();
+//				foo = new Scanner(is).useDelimiter("\\A").next();
+//				obj = new JSONObject(foo);
 			}
 		}
 		}

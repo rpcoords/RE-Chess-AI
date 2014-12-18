@@ -44,7 +44,7 @@ public class AlphaBetaTree {
 //		}
 		int v = -999999999;
 		String a = "";
-		ArrayList<String> actions = action(state, color);
+		ArrayList<String> actions = action(state, 1);
 		int num = actions.size();
 		
 		a = actions.get(0);
@@ -71,11 +71,7 @@ public class AlphaBetaTree {
 		
 		int v = 999999999;
 		String a = "";
-		char opposite = 'b';
-		if (this.color == opposite) {
-			opposite = 'w';
-		}
-		ArrayList<String> actions = action(state, opposite);
+		ArrayList<String> actions = action(state, 2);
 		int num = actions.size();
 		
 		
@@ -144,17 +140,20 @@ public class AlphaBetaTree {
 		return state.eval(color);
 	}
 	
-	public ArrayList<String> action(ChessBoard state, char c) {
+	public ArrayList<String> action(ChessBoard state, int colNum) {
 		ArrayList<String> actions = new ArrayList<String>();
 		ArrayList<int[]> acts = new ArrayList<int[]>();
 		int [] locs = new int[2];
 		String temp =  "";
-		c = 'w';
+		char c = 'w';
+		if (colNum == 2) {
+			c = 'b';
+		}
 		
 		// Checks every square
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-//				System.out.println(c);
+//				System.out.println(actions.size());
 //				System.out.println((state.board[x][y].color == c));
 				if ((state.board[x][y].color == c)) {
 					acts = state.moveLocations(x, y);
@@ -166,7 +165,11 @@ public class AlphaBetaTree {
 				}
 			}
 		}
-//		System.out.println("size: " + actions.size());
+		
+		for (int i = 0; i < actions.size(); i++) {
+//			System.out.println(actions.get(i));
+		}
+//		System.out.println(actions.get(0) + " size: " + actions.size());
 		return actions;
 	}
 	
