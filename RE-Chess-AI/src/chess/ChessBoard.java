@@ -125,25 +125,28 @@ public class ChessBoard {
 	/**
 	 * Updates chess board after a move is made.
 	 * @param move the most recent move made.
-	 * TODO: Create moveUpdate
 	 */
-	public void moveUpdate(String move) {
+	public ChessBoard moveUpdate(String move) {
 		move = move.toLowerCase();
 //		System.out.println("move: " + move);
 		String currY = move.substring(1, 2);
 		String currX = move.substring(2, 3);
 		String newY = move.substring(3, 4);
 		String newX = move.substring(4, 5);
+		ChessBoard newBoard = new ChessBoard();
 //		System.out.println((Integer.valueOf(currX).intValue() - 1) + "" + rankerz(currY) + "-" + (Integer.valueOf(newX).intValue() - 1) + "" + rankerz(newY));
 		
-		board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)].color = board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].color;
-		board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)].piece = board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].piece;
-				
-				
-		board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].color = 'e';
-		board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].piece = Piece.e;
+		newBoard = this.clone();
+		
+		newBoard.board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)].color = this.board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].color;
+		newBoard.board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)].piece = this.board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].piece;
+		
+		newBoard.board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].color = 'e';
+		newBoard.board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].piece = Piece.e;
 		
 //		System.out.println(board[Integer.valueOf(newX).intValue() - 1][rankerz(newY)].piece + " " + board[Integer.valueOf(currX).intValue() - 1][rankerz(currY)].piece);
+		
+		return newBoard;
 	}
 	
 	public int rankerz(String y) {

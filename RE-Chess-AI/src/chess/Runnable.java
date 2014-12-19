@@ -81,7 +81,7 @@ public class Runnable {
 				System.out.println("last " + obj.getString("lastmove"));
 				if (lastMove != obj.getString("lastmove")) {
 					lastMove = obj.getString("lastmove");
-					cb.moveUpdate(lastMove);
+					cb = cb.moveUpdate(lastMove);
 				}
 				} catch (JSONException e) { }
 				lastMoveNumber = obj.getInt("lastmovenumber");
@@ -102,6 +102,7 @@ public class Runnable {
 //				}
 				// TODO: Make move.
 				ourMove = abt.alphaBetaSearch(cb);
+				cb = cb.moveUpdate(ourMove);
 //				System.out.println("our: " + ourMove);
 //				if (lastMoveNumber == 0) {
 //					ourMove = "Pe2e4";
