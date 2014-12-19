@@ -317,7 +317,7 @@ public class ChessBoard {
 					if (file+i < 7 && board[file+i][rank].color != pcolor) {
 						answer.add(new int[]{file+i, rank});
 					}
-					else if((file+i < 1) && (board[file+i][rank].color != 'e')){
+					else if((file+i < 6) && (board[file+i][rank].color != 'e')){
 						answer.add(new int[]{file+i+1, rank});
 						break;
 					}
@@ -371,7 +371,7 @@ public class ChessBoard {
 					if (file > 0 && board[file-i][rank].color != board[file][rank].color) {
 						answer.add(new int[]{file-i, rank});
 					}
-					else if((file+i < 1) && (board[file+i][rank].color != 'e')){
+					else if((file+i > 1) && (board[file+i][rank].color != 'e')){
 						answer.add(new int[]{file+i+1, rank});
 						break;
 					}
@@ -455,7 +455,7 @@ public class ChessBoard {
 					if (file+i < 7 && board[file+i][rank].color != pcolor) {
 						answer.add(new int[]{file+i, rank});
 					}
-					else if((file+i < 1) && (board[file+i][rank].color != 'e')){
+					else if((file+i < 6) && (board[file+i][rank].color != 'e')){
 						answer.add(new int[]{file+i+1, rank});
 						break;
 					}
@@ -509,7 +509,7 @@ public class ChessBoard {
 					if (file > 0 && board[file-i][rank].color != board[file][rank].color) {
 						answer.add(new int[]{file-i, rank});
 					}
-					else if((file+i < 1) && (board[file+i][rank].color != 'e')){
+					else if((file+i > 1) && (board[file+i][rank].color != 'e')){
 						answer.add(new int[]{file+i+1, rank});
 						break;
 					}
