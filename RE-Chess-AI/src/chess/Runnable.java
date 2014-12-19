@@ -83,7 +83,6 @@ public class Runnable {
 					URLConnection conn2 = movingURL.openConnection();
 					InputStream blah = conn2.getInputStream();
 					System.out.println(movingURL);
-					cb.moveUpdate(ourMove);
 				}catch(java.io.FileNotFoundException e){}
 			} else {
 				// TODO: Wait 5 seconds and poll again.

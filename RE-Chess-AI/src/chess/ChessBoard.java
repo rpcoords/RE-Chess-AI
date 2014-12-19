@@ -266,7 +266,7 @@ public class ChessBoard {
 					if ((file > 0) && (rank > 0)) {
 						answer.add(new int[]{file-i, rank-i});
 					}
-					else if((file > 1) && (rank < 6) && (board[file-i][rank+i].color != 'e')){
+					else if((file > 1) && (rank > 1) && (board[file-i][rank-i].color != 'e')){
 						answer.add(new int[]{file-i-1, rank+i+1});
 						break;
 					}
@@ -274,7 +274,7 @@ public class ChessBoard {
 						break;
 					}
 					i++;
-				}while(board[file-i][rank-i].piece == Piece.e && board[file-i-1][rank-i-1].color != pcolor);
+				}
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				break;
 			case n:
@@ -448,7 +448,7 @@ public class ChessBoard {
 						break;
 					}
 					i++;
-				}while(board[file-i][rank-i].piece == Piece.e && board[file-i-1][rank-i-1].color != pcolor);
+				}
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				try {
 				while(true){
