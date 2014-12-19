@@ -263,11 +263,11 @@ public class ChessBoard {
 				i = 1;
 				try {
 				while(true){
-					if ((file > 0) && (rank > 0)) {
+					if ((file-i > 0) && (rank-i > 0)) {
 						answer.add(new int[]{file-i, rank-i});
 					}
-					else if((file > 1) && (rank > 1) && (board[file-i][rank-i].color != 'e')){
-						answer.add(new int[]{file-i-1, rank+i+1});
+					else if((file-i > 1) && (rank-i > 1) && (board[file-i][rank-i].color != 'e')){
+						answer.add(new int[]{file-i-1, rank-i-1});
 						break;
 					}
 					else{
@@ -437,11 +437,11 @@ public class ChessBoard {
 				i = 1;
 				try {
 				while(true){
-					if ((file > 0) && (rank > 0)) {
+					if ((file-i > 0) && (rank-i > 0)) {
 						answer.add(new int[]{file-i, rank-i});
 					}
-					else if((file > 1) && (rank < 6) && (board[file-i][rank+i].color != 'e')){
-						answer.add(new int[]{file-i-1, rank+i+1});
+					else if((file-i > 1) && (rank-i > 1) && (board[file-i][rank+i].color != 'e')){
+						answer.add(new int[]{file-i-1, rank-i-1});
 						break;
 					}
 					else{
