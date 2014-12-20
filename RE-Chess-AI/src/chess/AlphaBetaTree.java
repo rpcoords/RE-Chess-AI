@@ -50,6 +50,7 @@ public class AlphaBetaTree {
 		a = actions.get(0);
 		v = max(v, minVal(result(state, a), alpha, beta));
 		beta = v;
+		best = a;
 		
 		for (int i = 1; i < num; i++) {
 			a = actions.get(i);
@@ -57,14 +58,14 @@ public class AlphaBetaTree {
 			if (v >= beta) {
 				return a;
 			}
-			alpha = max(alpha, v);
-			if (v == alpha) {
+			beta = max(beta, v);
+			if (v == beta) {
 				best = a;
 			}
 		}
 		
 //		System.out.println(best);
-		return a;
+		return best;
 	}
 	
 	public int minVal(ChessBoard state, int alpha, int beta) {
@@ -82,7 +83,7 @@ public class AlphaBetaTree {
 			if (v <= alpha) {
 				return v;
 			}
-			beta = min(beta, v);
+			alpha = min(alpha, v);
 		}
 		
 		return v;
@@ -127,7 +128,7 @@ public class AlphaBetaTree {
 	 */
 	public ChessBoard result(ChessBoard state, String move) {
 		ChessBoard clone = state.clone();
-		clone.moveUpdate(move);
+		clone = clone.moveUpdate(move);
 		return clone;
 	}
 	
@@ -167,7 +168,9 @@ public class AlphaBetaTree {
 		}
 		
 //		for (int i = 0; i < actions.size(); i++) {
-//			System.out.println(actions.get(i));
+//			if (actions.get(i).substring(0, 1).equals("P")) {
+//				System.out.println(colNum + " " + actions.get(i));
+//			}
 //		}
 //		System.out.println(actions.get(0) + " size: " + actions.size());
 		return actions;

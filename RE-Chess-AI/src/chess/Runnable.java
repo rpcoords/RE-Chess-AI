@@ -75,19 +75,19 @@ public class Runnable {
 			String foo = new Scanner(is).useDelimiter("\\A").next();
 			JSONObject obj = new JSONObject(foo);
 			ready = obj.getBoolean("ready");
-			System.out.println(lastMoveNumber + " " + ready + "-" + foo);
+//			System.out.println(lastMoveNumber + " " + ready + "-" + foo);
 			if (lastMoveNumber != obj.getInt("lastmovenumber")) {
 				try {
-				System.out.println("last " + obj.getString("lastmove"));
+//				System.out.println("last " + obj.getString("lastmove"));
 				if (lastMove != obj.getString("lastmove")) {
 					lastMove = obj.getString("lastmove");
 					cb = cb.moveUpdate(lastMove);
 				}
 				} catch (JSONException e) { }
 				lastMoveNumber = obj.getInt("lastmovenumber");
-				System.out.println(foo);
+//				System.out.println(foo);
 			}
-			System.out.println(cb.board[0][1].piece + " " + cb.board[2][0].piece);
+//			System.out.println(cb.board[0][1].piece + " " + cb.board[2][0].piece);
 			// Checks if
 			if (ready) {
 				// TODO: Update chess board.
@@ -111,7 +111,7 @@ public class Runnable {
 					URL movingURL = new URL(moveLink+ourMove+"/");
 					URLConnection conn2 = movingURL.openConnection();
 					InputStream blah = conn2.getInputStream();
-					System.out.println("move: " + movingURL);
+//					System.out.println("move: " + movingURL);
 					
 //					ready = false;
 				}catch(java.io.FileNotFoundException e){}

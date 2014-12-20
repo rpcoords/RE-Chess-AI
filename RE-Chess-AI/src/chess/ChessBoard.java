@@ -184,33 +184,34 @@ public class ChessBoard {
 		switch(moving){
 			case e: break;
 			case p: try {
-				if(pcolor == 'w' && board[file][rank+1].piece == Piece.e){
-					answer.add(new int[]{file,rank+1});
+//				System.out.println("in case.");
+				if((pcolor == 'w') && (board[file+1][rank].piece == Piece.e)){
+					answer.add(new int[]{file+1,rank});
 				}
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				try {
-				if(pcolor == 'w' && board[file+1][rank+1].color == 'b'){
+				if((pcolor == 'w') && (board[file+1][rank+1].color == 'b')){
 					answer.add(new int[]{file+1,rank+1});
 				}
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				try {
-				if(pcolor == 'w' && board[file-1][rank+1].color == 'b'){
+				if((pcolor == 'w') && (board[file+1][rank-1].color == 'b')){
+					answer.add(new int[]{file+1,rank-1});
+				}
+				} catch (ArrayIndexOutOfBoundsException e) { }
+				try {
+				if((pcolor == 'b') && (board[file-1][rank].piece == Piece.e)){
+					answer.add(new int[]{file-1,rank});
+				}
+				} catch (ArrayIndexOutOfBoundsException e) { }
+				try {
+				if((pcolor == 'b') && (board[file-1][rank+1].color == 'w')){
 					answer.add(new int[]{file-1,rank+1});
 				}
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				try {
-				if(pcolor == 'b' && board[file][rank-1].piece == Piece.e){
-					answer.add(new int[]{file,rank-1});
-				}
-				} catch (ArrayIndexOutOfBoundsException e) { }
-				try {
-				if(pcolor == 'b' && board[file+1][rank+1].color == 'w'){
-					answer.add(new int[]{file+1,rank+1});
-				}
-				} catch (ArrayIndexOutOfBoundsException e) { }
-				try {
-				if(pcolor == 'b' && board[file-1][rank+1].color == 'w'){
-					answer.add(new int[]{file-1,rank+1});
+				if((pcolor == 'b') && (board[file-1][rank-1].color == 'w')){
+					answer.add(new int[]{file-1,rank-1});
 				}
 				} catch (ArrayIndexOutOfBoundsException e) { }
 			case b: int i = 1;
