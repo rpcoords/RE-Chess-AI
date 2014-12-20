@@ -222,7 +222,8 @@ public class ChessBoard {
 					else if((file+i < 6) && (rank+i < 6) && (board[file+i][rank+i].color != 'e')){
 						answer.add(new int[]{file+i+1, rank+i+1});
 						break;
-					}else{
+					}
+					else{
 						break;
 					}
 					i++;
@@ -238,7 +239,8 @@ public class ChessBoard {
 					else if((file+i < 6) && (rank-i > 1) && (board[file+i][rank-i].color != 'e')){
 						answer.add(new int[]{file+i+1, rank-i-1});
 						break;
-					}else{
+					}
+					else{
 						break;
 					}
 					i++;
@@ -317,7 +319,7 @@ public class ChessBoard {
 					if (file+i < 7 && board[file+i][rank].color != pcolor) {
 						answer.add(new int[]{file+i, rank});
 					}
-					else if((file+i < 1) && (board[file+i][rank].color != 'e')){
+					else if((file+i < 6) && (board[file+i][rank].color != 'e')){
 						answer.add(new int[]{file+i+1, rank});
 						break;
 					}
@@ -368,7 +370,7 @@ public class ChessBoard {
 					if (file > 0 && board[file-i][rank].color != board[file][rank].color) {
 						answer.add(new int[]{file-i, rank});
 					}
-					else if((file+i < 1) && (board[file+i][rank].color != 'e')){
+					else if((file+i > 1) && (board[file+i][rank].color != 'e')){
 						answer.add(new int[]{file+i+1, rank});
 						break;
 					}
@@ -381,138 +383,138 @@ public class ChessBoard {
 				}
 				break;
 			case q: i = 1;
-				try {
-				while(true){
-					if ((file+i < 7) && (rank+i < 7) && (board[file+i][rank+i].color != pcolor)) {
-						answer.add(new int[]{file+i, rank+i});
-					}
-					else if((file+i < 6) && (rank+i < 6) && (board[file+i][rank+i].color != 'e')){
-						answer.add(new int[]{file+i+1, rank+i+1});
-						break;
-					}
-					else{
-						break;
-					}
-					i++;
-				} //check one space further for piece of same color to stop it here, to be implimented
-				} catch (ArrayIndexOutOfBoundsException e) {
+			try {
+			while(true){
+				if ((file+i < 7) && (rank+i < 7) && (board[file+i][rank+i].color != pcolor)) {
+					answer.add(new int[]{file+i, rank+i});
 				}
-				i = 1;
-				try {
-				while(true){
-					if ((file+i < 7) && (rank-i > 0) && (board[file+i][rank-i].color != pcolor)) {
-						answer.add(new int[]{file+i, rank-i});
-					}
-					else if((file+i < 6) && (rank-i > 1) && (board[file+i][rank-i].color != 'e')){
-						answer.add(new int[]{file+i+1, rank-i-1});
-						break;
-					}
-					else{
-						break;
-					}
-					i++;
+				else if((file+i < 6) && (rank+i < 6) && (board[file+i][rank+i].color != 'e')){
+					answer.add(new int[]{file+i+1, rank+i+1});
+					break;
 				}
-				} catch (ArrayIndexOutOfBoundsException e) { }
-				i = 1;
-				try {
-				while(true){
-					if ((file-i > 0) && (rank+i < 7)) {
-						answer.add(new int[]{file-i, rank+i});
-					}
-					else if((file-i > 1) && (rank+i < 6) && (board[file-i][rank+i].color != 'e')){
-						answer.add(new int[]{file-i-1, rank+i+1});
-						break;
-					}
-					else{
-						break;
-					}
-					i++;
+				else{
+					break;
 				}
-				} catch (ArrayIndexOutOfBoundsException e) { }
-				i = 1;
-				try {
-				while(true){
-					if ((file-i > 0) && (rank-i > 0)) {
-						answer.add(new int[]{file-i, rank-i});
-					}
-					else if((file-i > 1) && (rank-i > 1) && (board[file-i][rank-i].color != 'e')){
-						answer.add(new int[]{file-i-1, rank-i-1});
-						break;
-					}
-					else{
-						break;
-					}
-					i++;
+				i++;
+			} //check one space further for piece of same color to stop it here, to be implimented
+			} catch (ArrayIndexOutOfBoundsException e) {
+			}
+			i = 1;
+			try {
+			while(true){
+				if ((file+i < 7) && (rank-i > 0) && (board[file+i][rank-i].color != pcolor)) {
+					answer.add(new int[]{file+i, rank-i});
 				}
-				} catch (ArrayIndexOutOfBoundsException e) { }
-				try {
-				while(true){
-					if (file+i < 7 && board[file+i][rank].color != pcolor) {
-						answer.add(new int[]{file+i, rank});
-					}
-					else if((file+i < 1) && (board[file+i][rank].color != 'e')){
-						answer.add(new int[]{file+i+1, rank});
-						break;
-					}
-					else{
-						break;
-					}
-					i++;
-				} //check one space further for piece of same color to stop it here, to be implimented
-				} catch (ArrayIndexOutOfBoundsException e) {
+				else if((file+i < 6) && (rank-i > 1) && (board[file+i][rank-i].color != 'e')){
+					answer.add(new int[]{file+i+1, rank-i-1});
+					break;
 				}
-				i = 1;
-				try {
-				while(true){
-					if (rank > 0 && board[file][rank-i].color != board[file][rank].color) {
-						answer.add(new int[]{file, rank-i});
-					}
-					else if((rank-i > 1) && (board[file][rank-i].color != 'e')){
-						answer.add(new int[]{file, rank-i-1});
-						break;
-					}
-					else{
-						break;
-					}
-					i++;
+				else{
+					break;
 				}
-				} catch (ArrayIndexOutOfBoundsException e) {
+				i++;
+			}
+			} catch (ArrayIndexOutOfBoundsException e) { }
+			i = 1;
+			try {
+			while(true){
+				if ((file-i > 0) && (rank+i < 7)) {
+					answer.add(new int[]{file-i, rank+i});
 				}
-				i = 1;
-				try {
-				while(true){
-					if (rank < 7 && board[file][rank+i].color != board[file][rank].color) {
-						answer.add(new int[]{file, rank+i});
-					}
-					else if((rank+i < 6) && (board[file][rank+i].color != 'e')){
-						answer.add(new int[]{file, rank+i+1});
-						break;
-					}
-					else{
-						break;
-					}
-					i++;
+				else if((file-i > 1) && (rank+i < 6) && (board[file-i][rank+i].color != 'e')){
+					answer.add(new int[]{file-i-1, rank+i+1});
+					break;
 				}
-				} catch (ArrayIndexOutOfBoundsException e) {
+				else{
+					break;
 				}
-				i = 1;
-				try {
-				while(true){
-					if (file > 0 && board[file-i][rank].color != board[file][rank].color) {
-						answer.add(new int[]{file-i, rank});
-					}
-					else if((file+i < 1) && (board[file+i][rank].color != 'e')){
-						answer.add(new int[]{file+i+1, rank});
-						break;
-					}
-					else{
-						break;
-					}
-					i++;
+				i++;
+			}
+			} catch (ArrayIndexOutOfBoundsException e) { }
+			i = 1;
+			try {
+			while(true){
+				if ((file-i > 0) && (rank-i > 0)) {
+					answer.add(new int[]{file-i, rank-i});
 				}
-				} catch (ArrayIndexOutOfBoundsException e) {
+				else if((file-i > 1) && (rank-i > 1) && (board[file-i][rank+i].color != 'e')){
+					answer.add(new int[]{file-i-1, rank-i-1});
+					break;
 				}
-				break;
+				else{
+					break;
+				}
+				i++;
+			}
+			} catch (ArrayIndexOutOfBoundsException e) { }
+			try {
+			while(true){
+				if (file+i < 7 && board[file+i][rank].color != pcolor) {
+					answer.add(new int[]{file+i, rank});
+				}
+				else if((file+i < 6) && (board[file+i][rank].color != 'e')){
+					answer.add(new int[]{file+i+1, rank});
+					break;
+				}
+				else{
+					break;
+				}
+				i++;
+			} //check one space further for piece of same color to stop it here, to be implimented
+			} catch (ArrayIndexOutOfBoundsException e) {
+			}
+			i = 1;
+			try {
+			while(true){
+				if (rank > 0 && board[file][rank-i].color != board[file][rank].color) {
+					answer.add(new int[]{file, rank-i});
+				}
+				else if((rank-i > 1) && (board[file][rank-i].color != 'e')){
+					answer.add(new int[]{file, rank-i-1});
+					break;
+				}
+				else{
+					break;
+				}
+				i++;
+			}
+			} catch (ArrayIndexOutOfBoundsException e) {
+			}
+			i = 1;
+			try {
+			while(true){
+				if (rank < 7 && board[file][rank+i].color != board[file][rank].color) {
+					answer.add(new int[]{file, rank+i});
+				}
+				else if((rank+i < 6) && (board[file][rank+i].color != 'e')){
+					answer.add(new int[]{file, rank+i+1});
+					break;
+				}
+				else{
+					break;
+				}
+				i++;
+			}
+			} catch (ArrayIndexOutOfBoundsException e) {
+			}
+			i = 1;
+			try {
+			while(true){
+				if (file > 0 && board[file-i][rank].color != board[file][rank].color) {
+					answer.add(new int[]{file-i, rank});
+				}
+				else if((file+i > 1) && (board[file+i][rank].color != 'e')){
+					answer.add(new int[]{file+i+1, rank});
+					break;
+				}
+				else{
+					break;
+				}
+				i++;
+			}
+			} catch (ArrayIndexOutOfBoundsException e) {
+			}
+			break;
 			case k:
 				try {
 				if(board[file+1][rank+1].color != s.color){
@@ -555,8 +557,8 @@ public class ChessBoard {
 				}
 				} catch (ArrayIndexOutOfBoundsException e) { }
 				break;
-		}
-	return answer;
+			}
+		return answer;
 	}
 	
 	public int eval(char col){
